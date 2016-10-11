@@ -17,3 +17,12 @@ class TestEditorGrafico(TestCase):
         self.assertEqual('W', c.area[1][1])
         with self.assertRaises(IndexError):
             c.set_pixel(5, 5, 'W')
+
+    def test_clear_canvas(self):
+        c = Canvas(3, 3)
+        for i in range(3):
+            for j in range(3):
+                c.set_pixel(j, i, 'W')
+        c.clear_canvas()
+        expected = [['O','O','O'],['O','O','O'],['O','O','O']]
+        self.assertEqual(expected, c.area)

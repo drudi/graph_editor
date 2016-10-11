@@ -6,3 +6,8 @@ class Canvas:
 
     def set_pixel(self, y, x, value):
         self.area[y][x] = value
+
+    def clear_canvas(self):
+        for i in range(len(self.area)):
+            for j in range(len(self.area[0])):
+                self.area[i][j] = 'O'
