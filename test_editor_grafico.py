@@ -10,3 +10,10 @@ class TestEditorGrafico(TestCase):
         c = Canvas(4, 3)
         expected.append(['O','O','O'])
         self.assertEqual(expected, c.area)
+
+    def test_set_pixel(self):
+        c = Canvas(3, 3)
+        c.set_pixel(1, 1, 'W')
+        self.assertEqual('W', c.area[1][1])
+        with self.assertRaises(IndexError):
+            c.set_pixel(5, 5, 'W')
