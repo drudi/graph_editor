@@ -26,3 +26,23 @@ class TestEditorGrafico(TestCase):
         c.clear_canvas()
         expected = [['O','O','O'],['O','O','O'],['O','O','O']]
         self.assertEqual(expected, c.area)
+
+    def test_vertical_line(self):
+        c = Canvas(4, 4)
+        expected = [['O', 'O', 'O', 'O'],
+                    ['O', 'W', 'O', 'O'],
+                    ['O', 'W', 'O', 'O'],
+                    ['O', 'O', 'O', 'O']]
+        # Falta testar o caso em que Y1 > Y2
+        c.vertical_line(1, 1, 2, 'W')
+        self.assertEqual(expected, c.area)
+
+    def test_horizontal_line(self):
+        c = Canvas(4, 4)
+        expected = [['O', 'O', 'O', 'O'],
+                    ['O', 'W', 'W', 'O'],
+                    ['O', 'O', 'O', 'O'],
+                    ['O', 'O', 'O', 'O']]
+        # Falta testar o caso em que X1 > X2
+        c.horizontal_line(1, 2, 1, 'W')
+        self.assertEqual(expected, c.area)
