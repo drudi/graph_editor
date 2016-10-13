@@ -46,3 +46,12 @@ class TestEditorGrafico(TestCase):
         # Falta testar o caso em que X1 > X2
         c.horizontal_line(1, 2, 1, 'W')
         self.assertEqual(expected, c.area)
+
+    def test_draw_rectangle(self):
+        expected = [['O', 'O', 'O', 'O'],
+                    ['W', 'W', 'W', 'O'],
+                    ['W', 'W', 'W', 'O'],
+                    ['W', 'W', 'W', 'O']]
+        c = Canvas(4, 4)
+        c.rectangle(0, 1, 2, 3, 'W')
+        self.assertEqual(expected, c.area)

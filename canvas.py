@@ -19,3 +19,8 @@ class Canvas:
     def horizontal_line(self, begin_column, end_column, line, color):
         for i in range(begin_column, end_column + 1):
             self.area[line][i] = color
+
+    def rectangle(self, ul_x, ul_y, br_x, br_y, color):
+        for i in range(ul_x, br_x + 1):
+            for j in range(ul_y, br_y + 1):
+                self.area[j][i] = color
