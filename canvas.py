@@ -2,7 +2,7 @@
 
 class Canvas:
     def __init__(self, m, n):
-        self.area = [['O' for i in range(n)] for i in range(m)]
+        self.area = [['O' for i in range(m)] for i in range(n)]
 
     def _check_swap(self, var1, var2):
         if var1 > var2:

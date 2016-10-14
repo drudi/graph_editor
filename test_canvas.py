@@ -7,7 +7,7 @@ class TestEditorGrafico(TestCase):
         c = Canvas(3, 3)
         self.assertEqual(expected, c.area)
 
-        c = Canvas(4, 3)
+        c = Canvas(3, 4)
         expected.append(['O','O','O'])
         self.assertEqual(expected, c.area)
 

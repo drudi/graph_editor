@@ -128,25 +128,25 @@ class EditorGrafico(cmd.Cmd):
 
     def do_L(self, line):
         X, Y, C = line.split(' ')
-        X = int(X)
-        Y = int(Y)
+        X = int(X) -1
+        Y = int(Y) -1
         self.canvas.set_pixel(X, Y, C)
 
     def do_V(self, line):
         X, Y1, Y2, C = line.split(' ')
-        self.canvas.vertical_line(int(X), int(Y1), int(Y2), C)
+        self.canvas.vertical_line(int(X) -1, int(Y1) -1 , int(Y2) -1, C)
 
     def do_H(self, line):
         X1, X2, Y, C = line.split(' ')
-        self.canvas.horizontal_line(int(X1), int(X2), int(Y), C)
+        self.canvas.horizontal_line(int(X1) -1, int(X2) -1, int(Y) -1, C)
 
     def do_K(self, line):
         X1, Y1, X2, Y2, C = line.split(' ')
-        self.canvas.rectangle(int(X1), int(Y1), int(X2), int(Y2), C)
+        self.canvas.rectangle(int(X1)-1, int(Y1)-1, int(X2)-1, int(Y2)-1, C)
 
     def do_F(self, line):
         X, Y, C = line.split(' ')
-        self.canvas.paint_region(int(X), int(Y), C)
+        self.canvas.paint_region(int(X)-1, int(Y)-1, C)
 
     def do_S(self, line):
         with open(line, 'w') as output:
