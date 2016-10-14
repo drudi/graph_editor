@@ -106,10 +106,58 @@ REEEEEEERR
 REEEEEEERR
 RRRRRRRRRR
 """
+import cmd
+from canvas import Canvas
 
+class EditorGrafico(cmd.Cmd):
+    """Interface em linha de comando para o editor grafico"""
+
+    def do_I(self, line):
+        M, N = (int(x) for x in line.split(' '))
+        self.canvas = Canvas(M, N)
+
+    def do_print(self, line):
+        print (self.canvas.area)
+
+    def do_X(self, line):
+        return True
+
+    def do_C(self, line):
+        self.canvas.clear_canvas()
+        print ("Matriz limpa")
+
+    def do_L(self, line):
+        X, Y, C = line.split(' ')
+        X = int(X)
+        Y = int(Y)
+        self.canvas.set_pixel(X, Y, C)
+
+    def do_V(self, line):
+        X, Y1, Y2, C = line.split(' ')
+        self.canvas.vertical_line(int(X), int(Y1), int(Y2), C)
+
+    def do_H(self, line):
+        X1, X2, Y, C = line.split(' ')
+        self.canvas.horizontal_line(int(X1), int(X2), int(Y), C)
+
+    def do_K(self, line):
+        X1, Y1, X2, Y2, C = line.split(' ')
+        self.canvas.rectangle(int(X1), int(Y1), int(X2), int(Y2), C)
+
+    def do_F(self, line):
+        X, Y, C = line.split(' ')
+        self.canvas.paint_region(int(X), int(Y), C)
+
+    def do_S(self, line):
+        with open(line, 'w') as output:
+            for linha in self.canvas.area:
+                for pixel in linha:
+                    output.write(pixel)
+                output.write("\n")
+            output.close()
 
 def main():
-    pass
+    EditorGrafico().cmdloop()
 
 if __name__ == '__main__':
     main()

@@ -33,9 +33,11 @@ class TestEditorGrafico(TestCase):
                     ['O', 'W', 'O', 'O'],
                     ['O', 'W', 'O', 'O'],
                     ['O', 'O', 'O', 'O']]
-        # Falta testar o caso em que Y1 > Y2
         c.vertical_line(1, 1, 2, 'W')
         self.assertEqual(expected, c.area)
+        d = Canvas(4, 4)
+        d.vertical_line(1, 2, 1, 'W')
+        self.assertEqual(expected, d.area)
 
     def test_horizontal_line(self):
         c = Canvas(4, 4)
@@ -43,9 +45,11 @@ class TestEditorGrafico(TestCase):
                     ['O', 'W', 'W', 'O'],
                     ['O', 'O', 'O', 'O'],
                     ['O', 'O', 'O', 'O']]
-        # Falta testar o caso em que X1 > X2
         c.horizontal_line(1, 2, 1, 'W')
         self.assertEqual(expected, c.area)
+        d = Canvas(4, 4)
+        d.horizontal_line(2, 1, 1, 'W')
+        self.assertEqual(expected, d.area)
 
     def test_draw_rectangle(self):
         expected = [['O', 'O', 'O', 'O'],
@@ -62,9 +66,17 @@ class TestEditorGrafico(TestCase):
                     ['O', 'W', 'W', 'W'],
                     ['X', 'O', 'W', 'O']]
         c = Canvas(4, 4)
-        c.set_pixel(3, 0, 'X')
-        c.set_pixel(3, 2, 'X')
+        c.set_pixel(0, 3, 'X')
+        c.set_pixel(2, 3, 'X')
         c.horizontal_line(0, 2, 1, 'X')
         c.horizontal_line(1, 3, 2, 'X')
         c.paint_region(1, 1, 'W')
+        self.assertEqual(expected, c.area)
+
+    def test_paint_only_one_pixel(self):
+        expected = [['O', 'O'],
+                    ['W', 'O']]
+        c = Canvas(2, 2)
+        c.set_pixel(0, 1, 'X')
+        c.paint_region(0, 1, 'W')
         self.assertEqual(expected, c.area)
