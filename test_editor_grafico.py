@@ -55,3 +55,16 @@ class TestEditorGrafico(TestCase):
         c = Canvas(4, 4)
         c.rectangle(0, 1, 2, 3, 'W')
         self.assertEqual(expected, c.area)
+
+    def test_paint_region(self):
+        expected = [['O', 'O', 'O', 'O'],
+                    ['W', 'W', 'W', 'O'],
+                    ['O', 'W', 'W', 'W'],
+                    ['X', 'O', 'W', 'O']]
+        c = Canvas(4, 4)
+        c.set_pixel(3, 0, 'X')
+        c.set_pixel(3, 2, 'X')
+        c.horizontal_line(0, 2, 1, 'X')
+        c.horizontal_line(1, 3, 2, 'X')
+        c.paint_region(1, 1, 'W')
+        self.assertEqual(expected, c.area)

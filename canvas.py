@@ -24,3 +24,20 @@ class Canvas:
         for i in range(ul_x, br_x + 1):
             for j in range(ul_y, br_y + 1):
                 self.area[j][i] = color
+
+    def paint_region(self, x, y, color):
+        original_color = self.area[y][x]
+        self._color_fill(y, x, original_color, color)
+
+    def _color_fill(self, row, col, original_color, new_color):
+        if row < 0 or row > len(self.area) - 1:
+            return None
+        if col < 0 or col > len(self.area[0]) - 1:
+            return None
+        if self.area[row][col] != original_color:
+            return None
+        self.area[row][col] = new_color
+        self._color_fill(row + 1, col, original_color, new_color)
+        self._color_fill(row - 1, col, original_color, new_color)
+        self._color_fill(row, col - 1, original_color, new_color)
+        self._color_fill(row, col + 1, original_color, new_color)
