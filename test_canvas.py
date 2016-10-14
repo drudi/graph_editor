@@ -1,14 +1,15 @@
 from unittest import TestCase
 from canvas import Canvas
 
+
 class TestEditorGrafico(TestCase):
     def test_create_empty_matrix(self):
-        expected = [['O','O','O'],['O','O','O'],['O','O','O']]
+        expected = [['O', 'O', 'O'], ['O', 'O', 'O'], ['O', 'O', 'O']]
         c = Canvas(3, 3)
         self.assertEqual(expected, c.area)
 
         c = Canvas(3, 4)
-        expected.append(['O','O','O'])
+        expected.append(['O', 'O', 'O'])
         self.assertEqual(expected, c.area)
 
     def test_set_pixel(self):
@@ -24,7 +25,7 @@ class TestEditorGrafico(TestCase):
             for j in range(3):
                 c.set_pixel(j, i, 'W')
         c.clear_canvas()
-        expected = [['O','O','O'],['O','O','O'],['O','O','O']]
+        expected = [['O', 'O', 'O'], ['O', 'O', 'O'], ['O', 'O', 'O']]
         self.assertEqual(expected, c.area)
 
     def test_vertical_line(self):

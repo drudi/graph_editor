@@ -109,6 +109,7 @@ RRRRRRRRRR
 import cmd
 from canvas import Canvas
 
+
 class EditorGrafico(cmd.Cmd):
     """Interface em linha de comando para o editor grafico"""
 
@@ -117,36 +118,37 @@ class EditorGrafico(cmd.Cmd):
         self.canvas = Canvas(M, N)
 
     def do_print(self, line):
-        print (self.canvas.area)
+        print(self.canvas.area)
 
     def do_X(self, line):
         return True
 
     def do_C(self, line):
         self.canvas.clear_canvas()
-        print ("Matriz limpa")
+        print("Matriz limpa")
 
     def do_L(self, line):
         X, Y, C = line.split(' ')
-        X = int(X) -1
-        Y = int(Y) -1
+        X = int(X) - 1
+        Y = int(Y) - 1
         self.canvas.set_pixel(X, Y, C)
 
     def do_V(self, line):
         X, Y1, Y2, C = line.split(' ')
-        self.canvas.vertical_line(int(X) -1, int(Y1) -1 , int(Y2) -1, C)
+        self.canvas.vertical_line(int(X) - 1, int(Y1) - 1, int(Y2) - 1, C)
 
     def do_H(self, line):
         X1, X2, Y, C = line.split(' ')
-        self.canvas.horizontal_line(int(X1) -1, int(X2) -1, int(Y) -1, C)
+        self.canvas.horizontal_line(int(X1) - 1, int(X2) - 1, int(Y) - 1, C)
 
     def do_K(self, line):
         X1, Y1, X2, Y2, C = line.split(' ')
-        self.canvas.rectangle(int(X1)-1, int(Y1)-1, int(X2)-1, int(Y2)-1, C)
+        self.canvas.rectangle(int(X1)-1, int(Y1) - 1,
+                              int(X2) - 1, int(Y2) - 1, C)
 
     def do_F(self, line):
         X, Y, C = line.split(' ')
-        self.canvas.paint_region(int(X)-1, int(Y)-1, C)
+        self.canvas.paint_region(int(X) - 1, int(Y) - 1, C)
 
     def do_S(self, line):
         with open(line, 'w') as output:
@@ -155,6 +157,7 @@ class EditorGrafico(cmd.Cmd):
                     output.write(pixel)
                 output.write("\n")
             output.close()
+
 
 def main():
     EditorGrafico().cmdloop()
