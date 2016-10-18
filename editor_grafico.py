@@ -108,13 +108,22 @@ RRRRRRRRRR
 """
 import cmd
 from canvas import Canvas
+from validator import IndexValidator, LimitValidator
 
 
 class EditorGrafico(cmd.Cmd):
     """Interface em linha de comando para o editor grafico"""
 
+    prompt = 'editor-> '
+
     def do_I(self, line):
         M, N = (int(x) for x in line.split(' '))
+        limits = LimitValidator()
+        try:
+            limits.validate(M, N)
+        except ValueError as e:
+            print(str(e))
+            return False
         self.canvas = Canvas(M, N)
 
     def do_print(self, line):
@@ -129,25 +138,64 @@ class EditorGrafico(cmd.Cmd):
 
     def do_L(self, line):
         X, Y, C = line.split(' ')
+        index = IndexValidator(self.canvas.area)
+        try:
+            index.validate('vertical', int(Y))
+            index.validate('horizontal', int(X))
+        except IndexError as e:
+            print(str(e))
+            return False
         X = int(X) - 1
         Y = int(Y) - 1
         self.canvas.set_pixel(X, Y, C)
 
     def do_V(self, line):
         X, Y1, Y2, C = line.split(' ')
+        index = IndexValidator(self.canvas.area)
+        try:
+            index.validate('horizontal', int(X))
+            index.validate('vertical', int(Y1))
+            index.validate('vertical', int(Y2))
+        except IndexError as e:
+            print(str(e))
+            return False
         self.canvas.vertical_line(int(X) - 1, int(Y1) - 1, int(Y2) - 1, C)
 
     def do_H(self, line):
         X1, X2, Y, C = line.split(' ')
+        index = IndexValidator(self.canvas.area)
+        try:
+            index.validate('horizontal', int(X1))
+            index.validate('horizontal', int(X2))
+            index.validate('vertical', int(Y))
+        except IndexError as e:
+            print(str(e))
+            return False
         self.canvas.horizontal_line(int(X1) - 1, int(X2) - 1, int(Y) - 1, C)
 
     def do_K(self, line):
         X1, Y1, X2, Y2, C = line.split(' ')
+        index = IndexValidator(self.canvas.area)
+        try:
+            index.validate('horizontal', int(X1))
+            index.validate('horizontal', int(X2))
+            index.validate('vertical', int(Y1))
+            index.validate('vertical', int(Y2))
+        except IndexError as e:
+            print(str(e))
+            return False
         self.canvas.rectangle(int(X1)-1, int(Y1) - 1,
                               int(X2) - 1, int(Y2) - 1, C)
 
     def do_F(self, line):
         X, Y, C = line.split(' ')
+        index = IndexValidator(self.canvas.area)
+        try:
+            index.validate('horizontal', int(X))
+            index.validate('vertical', int(Y))
+        except IndexError as e:
+            print(str(e))
+            return False
         self.canvas.paint_region(int(X) - 1, int(Y) - 1, C)
 
     def do_S(self, line):
